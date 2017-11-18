@@ -46,6 +46,7 @@ make
 
 ## TODO
 
+* URGENT - shaders rely on relative path from build folder, copy them during compilation process to build folder instead?
 * Implement additional fractals (e.g. Burning Ship, Julia Set, Sierpinski Carpet/Triangle)
 * Implement a graphical user interface to provide controls and information relating to the current fractal.
 * Work on numerical precision to allow for further zooming.

@@ -47,7 +47,6 @@ void Mandelbrot::SelectScreenLocation(double x, double y, bool increment_zoom)
     }
 
     UpdateShader();
-
     RenderToTexture();
 }
 
