@@ -1,67 +1,58 @@
+#include "display.h"
+#include "mandelbrot.h"
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 #include <iostream>
+#include <vector>
+#include <functional>
 
-static void error_callback(int error, const char* description)
+Mandelbrot* mandelbrot;
+
+void key_callback(int key)
 {
-    std::cerr << "GLFW Error: " << description << '\n';
+    if (key == GLFW_KEY_R)
+        mandelbrot->Reset();
+    else if (key == GLFW_KEY_UP)
+        mandelbrot->IncrementIterations(50);
+    else if (key == GLFW_KEY_DOWN)
+        mandelbrot->IncrementIterations(-50);
 }
 
-static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+void click_callback(int x, int y, int button_type)
 {
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, GLFW_TRUE);
+    if (button_type == GLFW_MOUSE_BUTTON_LEFT)
+        mandelbrot->SelectScreenLocation(x, y, true);
+    else if (button_type == GLFW_MOUSE_BUTTON_RIGHT)
+        mandelbrot->Undo();
 }
 
 int main(int argc, char** argv)
 {
-    glfwSetErrorCallback(error_callback);
-
-    if (!glfwInit())
-    {
-        std::cerr << "Failed to initialize GLFW\n";
-        return -1;
-    }
-
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-#ifdef __APPLE__
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-#endif
-
-    GLFWwindow* window = glfwCreateWindow(640, 480, "OpenGL", NULL, NULL);
-
-    if (!window)
-    {
-        std::cerr << "Failed to create a GLFW window\n";
-        glfwTerminate();
-        return -1;
-    }
-
-    glfwSetKeyCallback(window, key_callback);
-    glfwMakeContextCurrent(window);
+    Display display(960, 640, "Fractal Explorer");
 
     gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
 
-    glfwSwapInterval(1);
-    
-    int width, height;
-    glfwGetFramebufferSize(window, &width, &height);
-    glViewport(0, 0, width, height);
+    glViewport(0, 0, display.GetWidth(), display.GetHeight());
     glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 
-    while (!glfwWindowShouldClose(window))
+    mandelbrot = new Mandelbrot("../shaders/mandelbrot.frag", display.GetWidth(), display.GetHeight(), 500);
+
+    display.SetClickCallback(&click_callback);
+    display.SetKeyCallback(&key_callback);
+
+    while (display.IsOpen())
     {
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glfwSwapBuffers(window);
-        glfwPollEvents();
+        mandelbrot->RenderToScreen();
+
+        display.SwapBuffers();
+        display.PollEvents();
     }
 
-    glfwDestroyWindow(window);
-    glfwTerminate();
+    delete mandelbrot;
 
     return 0;
 }
