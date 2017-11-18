@@ -1,6 +1,6 @@
 ## Summary
 
-At university in 2015, I was tasked with creating a Java Swing GUI that rendered a Mandelbrot fractal, along with some other extensions like being able to zoom in or undo a zoom. This project is an attempt of recreating that using C++ and OpenGL.
+For one of my projects at university, I was tasked with creating a Java Swing GUI that rendered a Mandelbrot fractal, along with some other extensions like being able to zoom in or undo a zoom. This project is an attempt of recreating that using C++ and OpenGL.
 
 ## Dependencies
 
@@ -14,13 +14,13 @@ Internally this project uses [GLFW](https://github.com/glfw/glfw) for its window
 
 ```bash
 # Clone the repository
-git clone --recursive https://github.com/jordanlwest/Barebones-OpenGL-Project.git
+git clone --recursive https://github.com/jordanlwest/FractalExplorer.git
 ```
 
 * Make a build directory and run cmake in it for your particular build method.
 
 ```bash
-cd Barebones-OpenGL-Project
+cd FractalExplorer 
 mkdir build
 cd build/
 
