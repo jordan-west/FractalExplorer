@@ -36,3 +36,10 @@ cmake -G "Visual Studio 15 2017" ../
 ```
 make
 ```
+
+## Keybindings
+
+* Left click an area to zoom in.
+* Right click to undo a previous zoom.
+* Up and down arrow keys to raise or lower the maximum number of iterations for Mandelbrot generation.
+* R to reset to the initial configuration.
