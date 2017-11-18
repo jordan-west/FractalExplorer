@@ -43,3 +43,9 @@ make
 * Right click to undo a previous zoom.
 * Up and down arrow keys to raise or lower the maximum number of iterations for Mandelbrot generation.
 * R to reset to the initial configuration.
+
+## TODO
+
+* Implement additional fractals (e.g. Burning Ship, Julia Set, Sierpinski Carpet/Triangle)
+* Implement a graphical user interface to provide controls and information relating to the current fractal.
+* Work on numerical precision to allow for further zooming.
