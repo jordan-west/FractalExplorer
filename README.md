@@ -50,3 +50,7 @@ make
 * Implement additional fractals (e.g. Burning Ship, Julia Set, Sierpinski Carpet/Triangle)
 * Implement a graphical user interface to provide controls and information relating to the current fractal.
 * Work on numerical precision to allow for further zooming.
+
+## Screenshots
+
+![Mandelbrot Fractal](/screenshots/mandelbrot.png?raw=true)
